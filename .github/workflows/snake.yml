@@ -2,11 +2,11 @@ name: Generate Snake
 
 on:
   schedule:
-    - cron: "0 * * * *"  # Runs every hour
+    - cron: "0 * * * *"   # Runs every hour
   workflow_dispatch:
 
 permissions:
-  contents: write  # Grant write access to push changes
+  contents: write
 
 jobs:
   build:
@@ -25,10 +25,16 @@ jobs:
             dist/github-snake-dark.svg?palette=github-dark
             dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
 
+      - name: regeneration marker
+        run: |
+          date > dist/last-updated.txt
+
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Update snake animation"
           branch: main
           commit_user_name: "${{ github.actor }}"
-          commit_user_email: "${{ secrets.GIT_USER_EMAIL }}"  # Ensure this matches your GitHub email
+          commit_user_email: "${{ secrets.GIT_USER_EMAIL }}"
+          push_options: --force
+          commit_options: --allow-empty
