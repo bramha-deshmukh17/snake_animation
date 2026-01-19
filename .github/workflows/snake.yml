@@ -25,7 +25,7 @@ jobs:
       - name: Set Git Identity
         run: |
           git config --global user.name "Bramha Deshmukh"
-          git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
+          git config --global user.email "bramha-deshmukh17@users.noreply.github.com"
 
       - name: Generate Snake Animation
         uses: Platane/snk@v3
@@ -45,6 +45,10 @@ jobs:
         with:
           commit_message: "Update snake animation"
           branch: main
+          commit_user_name: "Bramha Deshmukh"
+          commit_user_email: "bramha-deshmukh17@users.noreply.github.com"
+          commit_author: "Bramha Deshmukh <bramha-deshmukh17@users.noreply.github.com>"
+
           commit_options: --allow-empty
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
